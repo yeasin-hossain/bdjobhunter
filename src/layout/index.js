@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../pages/common/spinner';
 import Header from '../pages/header';
-import { privateRoute, publicRoutes } from '../routes';
+import { authRoutes, privateRoute, publicRoutes } from '../routes';
+import AuthRoutes from '../routes/AuthRoutes';
 
 function Layout() {
   return (
@@ -20,6 +21,11 @@ function Layout() {
             <Route exact key={uuidv4()} path={route.path}>
               <route.component />
             </Route>
+          ))}
+          {authRoutes.map((route) => (
+            <AuthRoutes exact key={uuidv4()} path={route.path}>
+              <route.component />
+            </AuthRoutes>
           ))}
         </Switch>
       </Suspense>

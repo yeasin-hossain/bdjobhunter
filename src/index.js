@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { JobProvider } from './contenxt';
 import reportWebVitals from './reportWebVitals';
 import './style/custom.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <JobProvider>
+      <App />
+    </JobProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

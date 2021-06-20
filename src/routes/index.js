@@ -5,14 +5,6 @@ export const publicRoutes = [
     path: '/',
     component: lazy(() => import('../pages/home')),
   },
-  {
-    path: '/login',
-    component: lazy(() => import('../pages/auth/login')),
-  },
-  {
-    path: '/register',
-    component: lazy(() => import('../pages/auth/register')),
-  },
 ];
 
 export const privateRoute = [
@@ -27,5 +19,16 @@ export const privateRoute = [
   {
     path: '/apply',
     component: lazy(() => import('../pages/apply')),
+  },
+];
+
+export const authRoutes = [
+  {
+    path: '/login',
+    component: lazy(() => import('../pages/auth/login')),
+  },
+  {
+    path: '/register',
+    component: lazy(() => import('../pages/auth/register')),
   },
 ];

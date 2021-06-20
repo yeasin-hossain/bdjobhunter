@@ -4,21 +4,21 @@ import { isExpired } from 'react-jwt';
 import { Redirect, Route } from 'react-router-dom';
 import { getFromStorage } from '../util/localStore';
 
-function PrivateRoutes({ children, ...rest }) {
+function AuthRoutes({ children, ...rest }) {
   const user = getFromStorage();
-  const isMyTokenExpired = isExpired(user?.token);
-  console.log(user);
+  const isMyTokenExpired = isExpired(user);
+  console.log(isMyTokenExpired);
   return (
     <Route
       {...rest}
       render={({ location }) =>
         // eslint-disable-next-line no-constant-condition
-        !isMyTokenExpired ? (
+        isMyTokenExpired ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: '/auth',
+              pathname: '/',
               state: { from: location },
             }}
           />
@@ -28,4 +28,4 @@ function PrivateRoutes({ children, ...rest }) {
   );
 }
 
-export default PrivateRoutes;
+export default AuthRoutes;

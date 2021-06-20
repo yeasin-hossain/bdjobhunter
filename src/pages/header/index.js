@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { JobContext } from '../../contenxt';
+import Logout from '../auth/logout';
 
 function Header() {
+  const { loggedIn } = useContext(JobContext);
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -20,28 +24,21 @@ function Header() {
                 Home
               </Link>
             </Nav.Link>
-            <Nav.Link>
-              <Link
-                className="nav-link mx-3"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Profile"
-                to="/login"
-              >
-                login
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link
-                className="nav-link mx-3"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Profile"
-                to="/register"
-              >
-                register
-              </Link>
-            </Nav.Link>
+            {loggedIn ? (
+              <Logout />
+            ) : (
+              <Nav.Link>
+                <Link
+                  className="nav-link mx-3"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  title="Profile"
+                  to="/login"
+                >
+                  login
+                </Link>
+              </Nav.Link>
+            )}
           </Nav>
         </Container>
       </Navbar>
