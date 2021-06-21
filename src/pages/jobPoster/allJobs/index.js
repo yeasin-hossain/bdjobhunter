@@ -1,28 +1,31 @@
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getFromStorage } from '../../util/localStore';
-import Job from './Job';
+import { JobContext } from '../../../contenxt';
+import { getFromStorage } from '../../../util/localStore';
+import Job from '../../jobs/Job';
 
-function Jobs() {
+function AllJobs() {
+  const { currentUser } = useContext(JobContext);
   const [allJobs, setAllJobs] = useState([]);
-  const [limit, setLimit] = useState(20);
+
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}api/jobs/${limit}`, {
-        headers: {
-          Authorization: `Bearer ${getFromStorage()}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        setAllJobs(res.data.response);
-      });
-  }, [limit, setLimit]);
+    try {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}api/jobs/user/${currentUser.id}`, {
+          headers: {
+            Authorization: `Bearer ${getFromStorage()}`,
+          },
+        })
+        .then((res) => setAllJobs(res.data.response));
+    } catch (error) {
+      console.log(error);
+    }
+  }, [currentUser.id]);
   return (
-    <div>
+    <>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -43,8 +46,8 @@ function Jobs() {
           ))}
         </tbody>
       </Table>
-    </div>
+    </>
   );
 }
 
-export default Jobs;
+export default AllJobs;

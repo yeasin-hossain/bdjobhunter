@@ -17,8 +17,35 @@ export const privateRoute = [
     component: lazy(() => import('../pages/user')),
   },
   {
-    path: '/apply',
+    path: '/apply/:jobId',
     component: lazy(() => import('../pages/apply')),
+  },
+  {
+    path: '/admin',
+    component: lazy(() => import('../pages/admin')),
+  },
+  {
+    path: '/management',
+    component: lazy(() => import('../pages/jobPoster')),
+  },
+  {
+    path: '/management/addJob',
+    component: lazy(() => import('../pages/jobPoster')),
+  },
+  {
+    path: '/management/postedJobs',
+    component: lazy(() => import('../pages/jobPoster')),
+  },
+];
+
+export const managementRoutes = [
+  {
+    path: '/management/addJob',
+    component: lazy(() => import('../pages/jobPoster/addJob')),
+  },
+  {
+    path: '/management/postedJobs',
+    component: lazy(() => import('../pages/jobPoster/allJobs')),
   },
 ];
 

@@ -12,10 +12,11 @@ export const JobProvider = ({ children }) => {
     try {
       const userData = JSON.parse(localStorage.getItem('jobHunter'));
       const isMyTokenExpired = isExpired(userData);
-      console.log(isMyTokenExpired);
+
       if (isMyTokenExpired) {
         return <Redirect to="/login" />;
       }
+
       setLoggedIn(true);
       setCurrentUser(JSON.parse(atob(userData.split('.')[1])));
     } catch (err) {
