@@ -25,6 +25,10 @@ export const privateRoute = [
     component: lazy(() => import('../pages/admin')),
   },
   {
+    path: '/payment',
+    component: lazy(() => import('../pages/auth/payment')),
+  },
+  {
     path: '/management',
     component: lazy(() => import('../pages/jobPoster')),
   },

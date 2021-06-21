@@ -23,12 +23,17 @@ function Register() {
         role: isJobsPoster ? 'jobPoster' : 'jobSeeker',
       });
 
-      const { token } = user.data.response;
+      const { token, role } = user.data.response;
 
       saveInStorage(token);
       setLoggedIn(true);
       setCurrentUser(JSON.parse(atob(user.data.response.token.split('.')[1])));
-      history.replace(from);
+
+      if (role === 'jobPoster') {
+        history.push('/payment');
+      } else {
+        history.replace(from);
+      }
     } catch (error) {
       console.log(error);
       toast.error('Email Already Exist Or invalid info!');

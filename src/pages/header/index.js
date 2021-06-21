@@ -24,6 +24,28 @@ function Header() {
                 Home
               </Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link
+                className="nav-link mx-3"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Profile"
+                to="/jobs"
+              >
+                Jobs
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link
+                className="nav-link mx-3"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Profile"
+                to="/jobs"
+              >
+                Profile
+              </Link>
+            </Nav.Link>
             {loggedIn ? (
               <Logout />
             ) : (
