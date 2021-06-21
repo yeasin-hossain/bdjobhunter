@@ -15,7 +15,7 @@ function ManageJobsPost() {
   useEffect(() => {
     try {
       axios
-        .get(`${process.env.REACT_APP_API_URL}api/jobs/${limit}`, {
+        .get(`${process.env.REACT_APP_API_URL}api/jobs/limit/${limit}`, {
           headers: {
             Authorization: `Bearer ${getFromStorage()}`,
           },
@@ -65,6 +65,7 @@ function ManageJobsPost() {
             <th>title</th>
             <th>Company Name</th>
             <th>Location</th>
+            <th>Tag</th>
             <th>status</th>
             <th>Action</th>
           </tr>
