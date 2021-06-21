@@ -8,13 +8,12 @@ import Job from './Job';
 
 function Jobs() {
   const [allJobs, setAllJobs] = useState([]);
-  const [defaultData, setDefaultData] = useState([]);
   const [limit, setLimit] = useState(20);
-  const [filter] = useState('fullstack');
+  const [filter, setFilter] = useState('backend');
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/jobs/${limit}`, {
+      .get(`${process.env.REACT_APP_API_URL}api/jobs/${filter}/${limit}`, {
         headers: {
           Authorization: `Bearer ${getFromStorage()}`,
         },
@@ -22,30 +21,23 @@ function Jobs() {
       .then((res) => {
         const publishedJob = res.data.response.filter((job) => job.status === 'publish');
         setAllJobs(publishedJob);
-        setDefaultData(publishedJob);
       });
-  }, [limit]);
+  }, [filter, limit]);
 
-  useEffect(() => {
-    setAllJobs((prev) => prev.filter((item) => item.tag.toLowerCase() === filter.toLowerCase()));
-  }, [filter]);
-
-  const handClick = (e) => {
-    const data = defaultData.filter((i) => i.tag.toLowerCase() === e.toLowerCase());
-    console.log(data);
-    console.log(allJobs.length);
-  };
   return (
-    <div>
-      <select
-        className="form-select"
-        onClick={(e) => handClick(e.target.value)}
-        aria-label="Default select example"
-      >
-        <option value="backend">backend</option>
-        <option value="frontend">frontend</option>
-        <option value="fullStack">fullStack</option>
-      </select>
+    <div className=" d-flex justify-content-center flex-column p-5">
+      <div className="  py-3">
+        <p>Filter by your choice</p>
+        <select
+          className="form-select form control"
+          onClick={(e) => setFilter(e.target.value)}
+          aria-label="Default select example"
+        >
+          <option value="backend">backend</option>
+          <option value="frontend">frontend</option>
+          <option value="fullStack">fullStack</option>
+        </select>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -53,6 +45,8 @@ function Jobs() {
             <th>title</th>
             <th>Company Name</th>
             <th>Location</th>
+            <th>Tag</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -67,7 +61,7 @@ function Jobs() {
         </tbody>
       </Table>
       <div>
-        {allJobs.length < limit && (
+        {allJobs.length >= limit && (
           <button
             type="button"
             className="btn btn-primary"
