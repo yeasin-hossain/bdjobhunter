@@ -1,12 +1,27 @@
 /* eslint-disable no-nested-ternary */
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { JobContext } from '../../../contenxt';
 import StripeForm from './stripe';
 
 function Payment() {
+  const { currentUser } = useContext(JobContext);
   const [selectedPackage, setSelectedPackage] = useState({});
   const stripePromise = loadStripe(process.env.REACT_APP_Stripe_Api_Key);
+  const history = useHistory();
+  useEffect(() => {
+    // if user josPoster and already paid, can't visit this page
+    const { paid, role } = currentUser;
+    if (role === 'jobPoster') {
+      if (paid) {
+        history.push('/');
+      }
+    } else {
+      history.push('/');
+    }
+  }, [currentUser, history]);
   return (
     <div>
       <div className="d-flex justify-content-center flex-column">
