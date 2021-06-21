@@ -1,24 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { isExpired } from 'react-jwt';
 import { Redirect, Route } from 'react-router-dom';
 import { getFromStorage } from '../util/localStore';
 
-function PrivateRoutes({ children, ...rest }) {
-  const user = getFromStorage();
-  const isMyTokenExpired = isExpired(user);
+function AdminRoutes({ children, ...rest }) {
+  const user = JSON.parse(atob(getFromStorage().split('.')[1]));
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
         // eslint-disable-next-line no-constant-condition
-        !isMyTokenExpired ? (
+        user?.role === 'admin' ? (
           children
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: '/',
               state: { from: location },
             }}
           />
@@ -28,4 +26,4 @@ function PrivateRoutes({ children, ...rest }) {
   );
 }
 
-export default PrivateRoutes;
+export default AdminRoutes;

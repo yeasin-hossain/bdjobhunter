@@ -5,6 +5,7 @@ import Spinner from '../pages/common/spinner';
 import Header from '../pages/header';
 import { authRoutes, privateRoute, publicRoutes } from '../routes';
 import AuthRoutes from '../routes/AuthRoutes';
+import PrivateRoutes from '../routes/PrivateRoutes';
 
 function Layout() {
   return (
@@ -18,9 +19,9 @@ function Layout() {
             </Route>
           ))}
           {privateRoute.map((route) => (
-            <Route exact key={uuidv4()} path={route.path}>
+            <PrivateRoutes exact key={uuidv4()} path={route.path}>
               <route.component />
-            </Route>
+            </PrivateRoutes>
           ))}
           {authRoutes.map((route) => (
             <AuthRoutes exact key={uuidv4()} path={route.path}>

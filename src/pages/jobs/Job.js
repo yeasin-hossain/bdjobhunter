@@ -2,7 +2,7 @@
 import React from 'react';
 
 function Job({ job, index, children }) {
-  const { title, companyName, location } = job;
+  const { title, companyName, location, description, status } = job;
 
   return (
     <tr>
@@ -10,6 +10,7 @@ function Job({ job, index, children }) {
       <td>{title}</td>
       <td>{companyName}</td>
       <td>{location}</td>
+      <td>{status}</td>
       <td>{children}</td>
     </tr>
   );
