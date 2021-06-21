@@ -39,7 +39,6 @@ function ManageJobsPost() {
           },
         }
       );
-      console.log(updatedJob);
       const { response } = updatedJob.data;
       setAllJobs((info) =>
         info.map((PId) => {
