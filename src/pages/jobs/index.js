@@ -9,6 +9,8 @@ import Job from './Job';
 function Jobs() {
   const [allJobs, setAllJobs] = useState([]);
   const [limit, setLimit] = useState(20);
+  const [filter] = useState('fullstack');
+  const [defaultData, setDefaultData] = useState([]);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}api/jobs/${limit}`, {
@@ -17,12 +19,32 @@ function Jobs() {
         },
       })
       .then((res) => {
-        console.log(res);
-        setAllJobs(res.data.response);
+        const publishedJob = res.data.response.filter((job) => job.status === 'publish');
+        setAllJobs(publishedJob);
+        setDefaultData(publishedJob);
       });
   }, [limit, setLimit]);
+
+  useEffect(() => {
+    setAllJobs((prev) => prev.filter((item) => item.tag.toLowerCase() === filter.toLowerCase()));
+  }, [filter]);
+
+  const handClick = (e) => {
+    const data = defaultData.filter((i) => i.tag.toLowerCase() === e.toLowerCase());
+    console.log(data);
+    console.log(allJobs.length);
+  };
   return (
     <div>
+      <select
+        className="form-select"
+        onClick={(e) => handClick(e.target.value)}
+        aria-label="Default select example"
+      >
+        <option value="backend">backend</option>
+        <option value="frontend">frontend</option>
+        <option value="fullStack">fullStack</option>
+      </select>
       <Table striped bordered hover>
         <thead>
           <tr>

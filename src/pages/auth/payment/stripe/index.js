@@ -70,7 +70,7 @@ function StripeForm({ selectedPackage }) {
         );
 
         setCurrentUser(JSON.parse(atob(response.data.response.token.split('.')[1])));
-        toast.error('Payment Successfully Done');
+        toast.success('Payment Successfully Done');
         history.push('/management/postedJobs');
       } catch (err) {
         console.log(err);

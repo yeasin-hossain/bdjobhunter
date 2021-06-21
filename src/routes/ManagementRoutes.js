@@ -12,7 +12,7 @@ function ManagementRoutes({ children, ...rest }) {
       {...rest}
       render={({ location }) =>
         // eslint-disable-next-line no-constant-condition
-        user?.role === 'jobPoster' ? (
+        user?.role === 'jobPoster' && user?.paid ? (
           children
         ) : (
           <Redirect
