@@ -17,6 +17,7 @@ function AddJob() {
   const saveJob = async (e) => {
     e.preventDefault();
     try {
+      console.log(jobInfo);
       setSpinner(true);
       await axios.post(
         `${process.env.REACT_APP_API_URL}api/jobs`,
@@ -65,7 +66,6 @@ function AddJob() {
           <Form.Label>job Category</Form.Label>
           <select
             name="tag"
-            value={jobInfo.tag || ''}
             onClick={(e) => setJobInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             className="form-select form-control"
             aria-label="Default select example"

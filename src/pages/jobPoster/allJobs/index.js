@@ -14,7 +14,7 @@ function AllJobs() {
   useEffect(() => {
     try {
       axios
-        .get(`${process.env.REACT_APP_API_URL}api/jobs/user/${currentUser.id}`, {
+        .get(`${process.env.REACT_APP_API_URL}api/jobs/byUser/${currentUser.id}`, {
           headers: {
             Authorization: `Bearer ${getFromStorage()}`,
           },

@@ -13,7 +13,7 @@ function Jobs() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/jobs/${filter}/${limit}`, {
+      .get(`${process.env.REACT_APP_API_URL}api/jobs/tag/${filter}/${limit}`, {
         headers: {
           Authorization: `Bearer ${getFromStorage()}`,
         },

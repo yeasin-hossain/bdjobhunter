@@ -23,7 +23,10 @@ function Apply() {
             Authorization: `Bearer ${getFromStorage()}`,
           },
         })
-        .then((res) => setJob(res.data.response));
+        .then((res) => {
+          console.log(res);
+          setJob(res.data.response);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +60,6 @@ function Apply() {
       console.log(error);
     }
   };
-  console.log(job.description);
   return (
     <div className="d-flex justify-content-center my-2">
       <Card style={{ width: '80%' }} className="p-3">
