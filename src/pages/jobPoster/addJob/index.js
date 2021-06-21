@@ -36,7 +36,7 @@ function AddJob() {
           },
         }
       );
-      // setJobInfo({});
+      setJobInfo({});
       saveInStorage(response.data.response.token);
       setCurrentUser(JSON.parse(atob(response.data.response.token.split('.')[1])));
       toast.success('job post Successfully, please wait for admin approval');

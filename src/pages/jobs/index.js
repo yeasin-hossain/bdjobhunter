@@ -26,7 +26,7 @@ function Jobs() {
 
   return (
     <div className=" d-flex justify-content-center flex-column p-5">
-      <div className="  py-3">
+      <div className="py-3">
         <p>Filter by your choice</p>
         <select
           className="form-select form control"
