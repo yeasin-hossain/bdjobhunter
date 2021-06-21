@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { JobContext } from '../../contenxt';
 import Logout from '../auth/logout';
@@ -11,19 +11,20 @@ function Header() {
   console.log(currentUser);
   return (
     <>
-      <Navbar bg="dark" variant="dark">
-        <Container fluid>
-          <Navbar.Brand>
-            <Link
-              className="nav-link mx-3"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Profile"
-              to="/"
-            >
-              Home
-            </Link>
-          </Navbar.Brand>
+      <Navbar bg="light" expand="lg" className="sticky-top">
+        <Navbar.Brand href="#home">
+          <Link
+            className="nav-link "
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Logo"
+            to="/"
+          >
+            BD JOB HUNTER
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link>
               <Link
@@ -105,7 +106,7 @@ function Header() {
               </Nav.Link>
             )}
           </Nav>
-        </Container>
+        </Navbar.Collapse>
       </Navbar>
     </>
   );

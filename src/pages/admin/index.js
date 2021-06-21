@@ -8,10 +8,10 @@ function Admin() {
   return (
     <div>
       <div className="row">
-        <div className="col-md-3">
+        <div className="col-md-2">
           <Sidebar />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-10">
           {adminRoutes.map((route) => (
             <AdminRoutes exact key={uuidv4()} path={route.path}>
               <route.component />

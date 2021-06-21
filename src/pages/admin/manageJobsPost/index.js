@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { getFromStorage } from '../../../util/localStore';
 import Job from '../../jobs/Job';
 
@@ -63,7 +64,7 @@ function ManageJobsPost() {
         </thead>
         <tbody>
           {allJobs.map((job, index) => (
-            <Job job={job} index={index}>
+            <Job job={job} index={index} key={job._id}>
               {job.status === 'pending' ? (
                 <button
                   onClick={() => updateJob(job, 'publish')}
@@ -82,9 +83,9 @@ function ManageJobsPost() {
                 </button>
               )}
 
-              <button type="button" className="mx-2 btn btn-primary">
-                Delete
-              </button>
+              <Link className=" mx-2 btn btn-primary" to={`/apply/${job._id}`}>
+                view
+              </Link>
             </Job>
           ))}
         </tbody>

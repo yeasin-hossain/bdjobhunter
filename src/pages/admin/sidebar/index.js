@@ -1,11 +1,12 @@
 import React from 'react';
 import { Menu, MenuItem, ProSidebar, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
+import style from './style.scss';
 
 function Sidebar() {
   return (
-    <div>
-      <ProSidebar>
+    <>
+      <ProSidebar className={style.sidebar} style={{ minHeight: '100vh' }}>
         <Menu iconShape="square">
           <MenuItem>Dashboard</MenuItem>
           <SubMenu title="Posts">
@@ -16,7 +17,7 @@ function Sidebar() {
           </SubMenu>
         </Menu>
       </ProSidebar>
-    </div>
+    </>
   );
 }
 

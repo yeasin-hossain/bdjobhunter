@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { JobContext } from '../../../../contenxt';
-import { getFromStorage } from '../../../../util/localStore';
+import { getFromStorage, saveInStorage } from '../../../../util/localStore';
 
 const cardOptions = {
   style: {
@@ -68,7 +68,7 @@ function StripeForm({ selectedPackage }) {
             },
           }
         );
-
+        saveInStorage(response.data.response.token);
         setCurrentUser(JSON.parse(atob(response.data.response.token.split('.')[1])));
         toast.success('Payment Successfully Done');
         history.push('/management/postedJobs');

@@ -6,12 +6,12 @@ function Job({ job, index, children }) {
 
   return (
     <tr>
-      <td>{index + 1}</td>
-      <td>{title}</td>
-      <td>{companyName}</td>
-      <td>{location}</td>
-      <td>{status}</td>
-      <td>{children}</td>
+      <td data-label="No">{index + 1}</td>
+      <td data-label="Title">{title}</td>
+      <td data-label="Company Name">{companyName}</td>
+      <td data-label="Location">{location}</td>
+      <td data-label="Status">{status}</td>
+      <td data-label="Action">{children}</td>
     </tr>
   );
 }

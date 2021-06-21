@@ -4,17 +4,18 @@ import { Button, Form } from 'react-bootstrap';
 import CKEditors from 'react-ckeditor-component';
 import { toast } from 'react-toastify';
 import { JobContext } from '../../../contenxt';
-import { getFromStorage } from '../../../util/localStore';
+import { getFromStorage, saveInStorage } from '../../../util/localStore';
 import Spinner from '../../common/spinner';
 
 function AddJob() {
   const [jobInfo, setJobInfo] = useState({ tag: 'frontend' });
   const [spinner, setSpinner] = useState(false);
 
-  const { currentUser } = useContext(JobContext);
+  const { currentUser, setCurrentUser } = useContext(JobContext);
+  const { id, companyName, postLimit } = currentUser;
+
   const saveJob = async (e) => {
     e.preventDefault();
-    const { id, companyName } = currentUser;
     try {
       setSpinner(true);
       await axios.post(
@@ -26,7 +27,18 @@ function AddJob() {
           },
         }
       );
-
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}api/user/${id}`,
+        { postLimit: postLimit - 1 },
+        {
+          headers: {
+            Authorization: `Bearer ${getFromStorage()}`,
+          },
+        }
+      );
+      setJobInfo({});
+      saveInStorage(response.data.response.token);
+      setCurrentUser(JSON.parse(atob(response.data.response.token.split('.')[1])));
       toast.success('job post Successfully, please wait for admin approval');
     } catch (error) {
       console.log(error);
@@ -43,6 +55,7 @@ function AddJob() {
           <Form.Label>job title</Form.Label>
           <Form.Control
             name="title"
+            value={jobInfo.title || ''}
             onChange={(e) => setJobInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             type="text"
             placeholder="Full-stack developer"
@@ -52,6 +65,7 @@ function AddJob() {
           <Form.Label>job Category</Form.Label>
           <select
             name="tag"
+            value={jobInfo.tag || ''}
             onClick={(e) => setJobInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             className="form-select form-control"
             aria-label="Default select example"
@@ -65,6 +79,7 @@ function AddJob() {
           <Form.Label>job location</Form.Label>
           <Form.Control
             name="location"
+            value={jobInfo.location || ''}
             onChange={(e) => setJobInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             type="text"
             placeholder="Full-stack developer"
@@ -74,6 +89,7 @@ function AddJob() {
           <Form.Label>job deadline</Form.Label>
           <Form.Control
             name="deadline"
+            value={jobInfo.deadline || ''}
             onChange={(e) => setJobInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             type="date"
             placeholder="Full-stack developer"
@@ -90,7 +106,8 @@ function AddJob() {
             }}
           />
         </Form.Group>
-        <Button type="submit">Save</Button>
+        {postLimit > 0 ? <Button type="submit">Save</Button> : <Button>Pay</Button>}
+        <p>reaming post {postLimit}</p>
       </Form>
     </div>
   );

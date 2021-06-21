@@ -29,10 +29,11 @@ function Apply() {
     }
   }, [jobId]);
 
+  const { id, email, name, role } = currentUser;
+
   const applyJob = async (e) => {
     e.preventDefault();
 
-    const { id, email, name } = currentUser;
     const { phone, portfolioLink } = userInfo;
     const applyInfo = {
       applicantId: id,
@@ -70,11 +71,13 @@ function Apply() {
           <Card.Text>tag:- {job.tag}</Card.Text>
           <Card.Text> {job.description && parse(job?.description)}</Card.Text>
         </Card.Body>
-        <Card.Footer>
-          <Button onClick={() => setShowModal(true)} variant="primary">
-            Apply
-          </Button>
-        </Card.Footer>
+        {role === 'jobSeeker' && (
+          <Card.Footer>
+            <Button onClick={() => setShowModal(true)} variant="primary">
+              Apply
+            </Button>
+          </Card.Footer>
+        )}
       </Card>
 
       {/* for applying jobs */}
