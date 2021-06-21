@@ -11,6 +11,7 @@ function Jobs() {
   const [limit, setLimit] = useState(20);
   const [filter] = useState('fullstack');
   const [defaultData, setDefaultData] = useState([]);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}api/jobs/${limit}`, {
@@ -57,7 +58,7 @@ function Jobs() {
         </thead>
         <tbody>
           {allJobs.map((job, index) => (
-            <Job job={job} index={index}>
+            <Job job={job} index={index} key={job._id}>
               <Link className="btn btn-primary" to={`/apply/${job._id}`}>
                 View
               </Link>

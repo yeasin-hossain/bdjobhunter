@@ -8,7 +8,6 @@ function Header() {
   const { loggedIn, currentUser } = useContext(JobContext);
 
   const { role, paid } = currentUser;
-  console.log(currentUser);
   return (
     <>
       <Navbar bg="light" expand="lg" className="sticky-top">

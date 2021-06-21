@@ -10,9 +10,11 @@ import Spinner from '../../common/spinner';
 function Login() {
   const [useInfo, setUserInfo] = useState({});
   const [spinner, setSpinner] = useState(false);
+
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
+
   const { setCurrentUser, setLoggedIn } = useContext(JobContext);
   const handleSubmit = async (e) => {
     e.preventDefault();

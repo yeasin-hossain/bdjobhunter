@@ -4,14 +4,17 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getFromStorage } from '../../../util/localStore';
+import Spinner from '../../common/spinner';
 import Job from '../../jobs/Job';
 
 function ManageJobsPost() {
   const [allJobs, setAllJobs] = useState([]);
+  const [spinner, setSpinner] = useState(false);
+  const [limit, setLimit] = useState(20);
   useEffect(() => {
     try {
       axios
-        .get(`${process.env.REACT_APP_API_URL}api/jobs/20`, {
+        .get(`${process.env.REACT_APP_API_URL}api/jobs/${limit}`, {
           headers: {
             Authorization: `Bearer ${getFromStorage()}`,
           },
@@ -20,10 +23,11 @@ function ManageJobsPost() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [limit]);
 
   const updateJob = async (job, data) => {
     try {
+      setSpinner(true);
       const { _id } = job;
       const updatedJob = await axios.put(
         `${process.env.REACT_APP_API_URL}api/jobs/${_id}`,
@@ -47,10 +51,13 @@ function ManageJobsPost() {
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      setSpinner(false);
     }
   };
   return (
-    <div>
+    <>
+      {spinner && <Spinner />}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -90,7 +97,16 @@ function ManageJobsPost() {
           ))}
         </tbody>
       </Table>
-    </div>
+      {allJobs.length === limit && (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => setLimit((prev) => prev + 20)}
+        >
+          Lead More
+        </button>
+      )}
+    </>
   );
 }
 
