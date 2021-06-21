@@ -20,7 +20,7 @@ function User() {
       .then((res) => setAllApply(res.data.response));
   }, [currentUser.id]);
   return (
-    <div>
+    <div className="container-fluid">
       <Table striped bordered hover>
         <thead>
           <tr>

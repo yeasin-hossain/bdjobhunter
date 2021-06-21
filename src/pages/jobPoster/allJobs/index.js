@@ -33,6 +33,8 @@ function AllJobs() {
             <th>title</th>
             <th>Company Name</th>
             <th>Location</th>
+            <th>tag</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
