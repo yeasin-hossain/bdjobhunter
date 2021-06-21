@@ -8,9 +8,9 @@ import Job from './Job';
 
 function Jobs() {
   const [allJobs, setAllJobs] = useState([]);
+  const [defaultData, setDefaultData] = useState([]);
   const [limit, setLimit] = useState(20);
   const [filter] = useState('fullstack');
-  const [defaultData, setDefaultData] = useState([]);
 
   useEffect(() => {
     axios
@@ -24,7 +24,7 @@ function Jobs() {
         setAllJobs(publishedJob);
         setDefaultData(publishedJob);
       });
-  }, [limit, setLimit]);
+  }, [limit]);
 
   useEffect(() => {
     setAllJobs((prev) => prev.filter((item) => item.tag.toLowerCase() === filter.toLowerCase()));
@@ -66,6 +66,17 @@ function Jobs() {
           ))}
         </tbody>
       </Table>
+      <div>
+        {allJobs.length < limit && (
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => setLimit((prev) => prev + 20)}
+          >
+            Lead More
+          </button>
+        )}
+      </div>
     </div>
   );
 }
