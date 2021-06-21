@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
+import parse from 'html-react-parser';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Card, Form, Modal } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -55,6 +56,7 @@ function Apply() {
       console.log(error);
     }
   };
+  console.log(job.description);
   return (
     <div className="d-flex justify-content-center my-2">
       <Card style={{ width: '80%' }} className="p-3">
@@ -66,7 +68,7 @@ function Apply() {
           <Card.Text>Location:- {job.location}</Card.Text>
           <Card.Text>deadline:- {job.deadline}</Card.Text>
           <Card.Text>tag:- {job.tag}</Card.Text>
-          <Card.Text>{job.description}</Card.Text>
+          <Card.Text> {job.description && parse(job?.description)}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <Button onClick={() => setShowModal(true)} variant="primary">
