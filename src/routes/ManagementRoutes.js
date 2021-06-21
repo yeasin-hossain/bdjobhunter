@@ -6,7 +6,6 @@ import { getFromStorage } from '../util/localStore';
 function ManagementRoutes({ children, ...rest }) {
   const user = JSON.parse(atob(getFromStorage().split('.')[1]));
 
-  console.log(user);
   return (
     <Route
       {...rest}

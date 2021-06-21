@@ -24,7 +24,6 @@ function Apply() {
           },
         })
         .then((res) => {
-          console.log(res);
           setJob(res.data.response);
         });
     } catch (error) {
@@ -46,7 +45,6 @@ function Apply() {
       portfolioLink,
       phone,
     };
-    console.log(applyInfo);
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}api/apply`, applyInfo, {
         headers: {

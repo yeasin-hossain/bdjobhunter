@@ -7,7 +7,6 @@ import { getFromStorage } from '../util/localStore';
 function AuthRoutes({ children, ...rest }) {
   const user = getFromStorage();
   const isMyTokenExpired = isExpired(user);
-  console.log(isMyTokenExpired);
   return (
     <Route
       {...rest}

@@ -37,17 +37,30 @@ function Header() {
               </Link>
             </Nav.Link>
             {role && role === 'jobSeeker' && (
-              <Nav.Link>
-                <Link
-                  className="nav-link mx-3"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="bottom"
-                  title="Profile"
-                  to="/jobs"
-                >
-                  Jobs
-                </Link>
-              </Nav.Link>
+              <>
+                <Nav.Link>
+                  <Link
+                    className="nav-link mx-3"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title="Profile"
+                    to="/profile"
+                  >
+                    profile
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    className="nav-link mx-3"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title="Profile"
+                    to="/jobs"
+                  >
+                    Jobs
+                  </Link>
+                </Nav.Link>
+              </>
             )}
             {role && role === 'jobPoster' && (
               <Nav.Link>
