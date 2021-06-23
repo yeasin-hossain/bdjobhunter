@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
   return (
     <>
-      <ProSidebar>
+      <ProSidebar className="bg-primary">
         <Menu iconShape="square">
           <MenuItem>Dashboard</MenuItem>
           <SubMenu title="Posts">

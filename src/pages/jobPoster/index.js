@@ -17,9 +17,6 @@ function JobPoster() {
               <route.component />
             </ManagementRoutes>
           ))}
-          {/* <ManagementRoutes path="/management/addJob">
-          <AddJob />
-        </ManagementRoutes> */}
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-skeleton';
 import { getFromStorage } from '../../util/localStore';
 import Job from './Job';
 
@@ -10,18 +11,21 @@ function Jobs() {
   const [allJobs, setAllJobs] = useState([]);
   const [limit, setLimit] = useState(20);
   const [filter, setFilter] = useState('backend');
-
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}api/jobs/tag/${filter}/${limit}`, {
-        headers: {
-          Authorization: `Bearer ${getFromStorage()}`,
-        },
-      })
-      .then((res) => {
-        const publishedJob = res.data.response.filter((job) => job.status === 'publish');
-        setAllJobs(publishedJob);
-      });
+    try {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}api/jobs/tag/${filter}/${limit}`, {
+          headers: {
+            Authorization: `Bearer ${getFromStorage()}`,
+          },
+        })
+        .then((res) => {
+          const publishedJob = res.data.response.filter((job) => job.status === 'publish');
+          setAllJobs(publishedJob);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }, [filter, limit]);
 
   return (
@@ -38,28 +42,35 @@ function Jobs() {
           <option value="fullStack">fullStack</option>
         </select>
       </div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>NO</th>
-            <th>title</th>
-            <th>Company Name</th>
-            <th>Location</th>
-            <th>Tag</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allJobs.map((job, index) => (
-            <Job job={job} index={index} key={job._id}>
-              <Link className="btn btn-primary" to={`/apply/${job._id}`}>
-                View
-              </Link>
-            </Job>
-          ))}
-        </tbody>
-      </Table>
+      {!allJobs.length > 0 ? (
+        <>
+          <Skeleton count={5} height={70} />
+        </>
+      ) : (
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>title</th>
+              <th>Company Name</th>
+              <th>Location</th>
+              <th>Tag</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {allJobs.map((job, index) => (
+              <Job job={job} index={index} key={job._id}>
+                <Link className="btn btn-primary" to={`/apply/${job._id}`}>
+                  View
+                </Link>
+              </Job>
+            ))}
+          </tbody>
+        </Table>
+      )}
       <div>
         {allJobs.length >= limit && (
           <button

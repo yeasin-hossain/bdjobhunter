@@ -52,7 +52,7 @@ function AllJobs() {
         </thead>
         <tbody>
           {allJobs.map((job, index) => (
-            <Job job={job} index={index}>
+            <Job job={job} key={job._id} index={index}>
               <Link className="btn btn-primary" to={`/apply/${job._id}`}>
                 View
               </Link>
