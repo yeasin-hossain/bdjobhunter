@@ -1,4 +1,4 @@
-`admin email:- yeasinxdp@gmail.com admin pass:- Shanto123@123`
+`admin email:- yeasinxdp@gmail.com || admin pass:- Shanto123@123`
 
 `job poster email:- yomaj33606@ermailo.com || job poster pass:- Shanto123@123`
 
