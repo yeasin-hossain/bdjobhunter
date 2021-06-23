@@ -12,7 +12,7 @@ function Logout() {
     history.push('/');
   };
   return (
-    <button className="btn btn-danger" type="button" onClick={logoutBtn}>
+    <button className="btn btn-warning" type="button" onClick={logoutBtn}>
       Logout
     </button>
   );
