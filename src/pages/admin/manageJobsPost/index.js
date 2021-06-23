@@ -3,6 +3,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { deleteJob } from '../../../util/deleteJob';
 import { getFromStorage } from '../../../util/localStore';
 import Spinner from '../../common/spinner';
 import Job from '../../jobs/Job';
@@ -55,12 +57,23 @@ function ManageJobsPost() {
       setSpinner(false);
     }
   };
+
+  const jobDelete = async (jobId) => {
+    const deletedJob = await deleteJob(jobId);
+    if (deletedJob.status === 200) {
+      setAllJobs((prev) => prev.filter((job) => job._id !== jobId));
+      toast.success('job Deleted Successfully');
+    } else {
+      toast.error('Something Want Wrong!');
+    }
+  };
+
   return (
     <>
       {spinner && <Spinner />}
       <Table striped bordered hover>
         <thead>
-          <tr>
+          <tr className="text-center">
             <th>NO</th>
             <th>title</th>
             <th>Company Name</th>
@@ -85,7 +98,7 @@ function ManageJobsPost() {
                 <button
                   onClick={() => updateJob(job, 'pending')}
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-info"
                 >
                   Pending
                 </button>
@@ -94,6 +107,13 @@ function ManageJobsPost() {
               <Link className=" mx-2 btn btn-primary" to={`/apply/${job._id}`}>
                 view
               </Link>
+              <button
+                onClick={() => jobDelete(job._id)}
+                type="button"
+                className="btn btn-warning mx-2"
+              >
+                Delete
+              </button>
             </Job>
           ))}
         </tbody>

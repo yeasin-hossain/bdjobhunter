@@ -6,10 +6,10 @@ function Apply({ apply, index, children }) {
     <>
       <tr>
         <td data-label="No">{index + 1}</td>
-        <td data-label="Company Name">{status}</td>
-        <td data-label="Company Name">{portfolioLink}</td>
-        <td data-label="Company Name">{phone}</td>
-        <td data-label="Location">{email}</td>
+        <td data-label="status">{status}</td>
+        <td data-label="Portfolio">{portfolioLink}</td>
+        <td data-label="Phone">{phone}</td>
+        <td data-label="email">{email}</td>
         <td data-label="Action">{children}</td>
       </tr>
     </>

@@ -25,7 +25,7 @@ function Carousel() {
   };
   return (
     <div className="my-5">
-      <h1 className="text-center"> Thousands of reputed Company Posted Their Vacancy </h1>
+      <h1 className="text-center my-3"> Thousands of reputed Company Posted Their Vacancy </h1>
       <Slider {...settings}>
         <div>
           <div className="card m-2">
@@ -78,12 +78,10 @@ function Carousel() {
         <div>
           <div className="card m-2">
             <div className="card-header">
-              <div className="card-title">HappyDesk</div>
+              <div className="card-title">Shanto Rahman</div>
             </div>
             <div className="card-body">
-              <div className="card-title">
-                WE Hired Our Full-Stack Developer, And We Grow Much More Better
-              </div>
+              <div className="card-title">I got my dream , applied from JOB HUNTER BD</div>
             </div>
           </div>
         </div>

@@ -3,7 +3,9 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { JobContext } from '../../../contenxt';
+import { deleteJob } from '../../../util/deleteJob';
 import { getFromStorage } from '../../../util/localStore';
 import Job from '../../jobs/Job';
 
@@ -24,6 +26,16 @@ function AllJobs() {
       console.log(error);
     }
   }, [currentUser.id]);
+
+  const jobDelete = async (jobId) => {
+    const deletedJob = await deleteJob(jobId);
+    if (deletedJob.status === 200) {
+      setAllJobs((prev) => prev.filter((job) => job._id !== jobId));
+      toast.success('job Deleted Successfully');
+    } else {
+      toast.error('Something Want Wrong!');
+    }
+  };
   return (
     <>
       <Table striped bordered hover>
@@ -44,6 +56,13 @@ function AllJobs() {
               <Link className="btn btn-primary" to={`/apply/${job._id}`}>
                 View
               </Link>
+              <button
+                onClick={() => jobDelete(job._id)}
+                type="button"
+                className="btn btn-warning mx-2"
+              >
+                Delete
+              </button>
             </Job>
           ))}
         </tbody>
