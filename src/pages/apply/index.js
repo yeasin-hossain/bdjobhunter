@@ -3,7 +3,7 @@ import axios from 'axios';
 import parse from 'html-react-parser';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Card, Form, Modal } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { JobContext } from '../../contenxt';
 import { getFromStorage } from '../../util/localStore';
@@ -71,13 +71,21 @@ function Apply() {
           <Card.Text>tag:- {job.tag}</Card.Text>
           <Card.Text> {job.description && parse(job?.description)}</Card.Text>
         </Card.Body>
-        {role === 'jobSeeker' && (
-          <Card.Footer>
+        <Card.Footer>
+          {role === 'jobSeeker' && (
             <Button onClick={() => setShowModal(true)} variant="primary">
               Apply
             </Button>
-          </Card.Footer>
-        )}
+          )}
+          {!email && (
+            <Card.Text>
+              For Apply Please Register
+              <Link className="btn btn-primary ml-2" to="/register">
+                Register
+              </Link>
+            </Card.Text>
+          )}
+        </Card.Footer>
       </Card>
 
       {/* for applying jobs */}

@@ -6,21 +6,22 @@ export const publicRoutes = [
     path: '/',
     component: lazy(() => import('../pages/home')),
   },
-];
-
-export const privateRoute = [
   {
     path: '/jobs',
     component: lazy(() => import('../pages/jobs')),
   },
   {
-    path: '/profile',
-    component: lazy(() => import('../pages/user')),
-  },
-  {
     path: '/apply/:jobId',
     component: lazy(() => import('../pages/apply')),
   },
+];
+
+export const privateRoute = [
+  {
+    path: '/profile',
+    component: lazy(() => import('../pages/user')),
+  },
+
   {
     path: '/admin',
     component: lazy(() => import('../pages/admin')),
