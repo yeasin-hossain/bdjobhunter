@@ -5,10 +5,10 @@ import Layout from './layout';
 
 function App() {
   return (
-    <div>
+    <>
       <Layout />
       <ToastContainer />
-    </div>
+    </>
   );
 }
 
