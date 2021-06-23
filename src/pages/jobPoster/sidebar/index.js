@@ -15,6 +15,9 @@ function Sidebar() {
             <MenuItem>
               <Link to="/management/postedJobs">posted job</Link>
             </MenuItem>
+            <MenuItem>
+              <Link to="/management/apply">All Application</Link>
+            </MenuItem>
           </SubMenu>
         </Menu>
       </ProSidebar>
