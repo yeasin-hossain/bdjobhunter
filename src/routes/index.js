@@ -31,6 +31,10 @@ export const privateRoute = [
     component: lazy(() => import('../pages/admin')),
   },
   {
+    path: '/admin/manageJobsApply',
+    component: lazy(() => import('../pages/admin')),
+  },
+  {
     path: '/payment',
     component: lazy(() => import('../pages/auth/payment')),
   },
@@ -46,6 +50,10 @@ export const privateRoute = [
     path: '/management/postedJobs',
     component: lazy(() => import('../pages/jobPoster')),
   },
+  {
+    path: '/management/apply',
+    component: lazy(() => import('../pages/jobPoster')),
+  },
 ];
 
 export const managementRoutes = [
@@ -56,6 +64,10 @@ export const managementRoutes = [
   {
     path: '/management/postedJobs',
     component: lazy(() => import('../pages/jobPoster/allJobs')),
+  },
+  {
+    path: '/management/apply',
+    component: lazy(() => import('../pages/jobPoster/allApply')),
   },
 ];
 

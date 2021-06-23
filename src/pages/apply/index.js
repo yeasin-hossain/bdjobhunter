@@ -40,6 +40,7 @@ function Apply() {
     const applyInfo = {
       applicantId: id,
       jobId: job._id,
+      jobPosterId: job.jobPosterId,
       email,
       name,
       portfolioLink,
@@ -59,7 +60,7 @@ function Apply() {
     }
   };
   return (
-    <div className="d-flex justify-content-center my-2">
+    <div className="d-flex justify-content-center my-2 ">
       <Card style={{ width: '80%' }} className="p-3">
         <Card.Header>
           <Card.Title>{job.title}</Card.Title>

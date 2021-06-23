@@ -35,10 +35,10 @@ function User() {
             <thead>
               <tr>
                 <th>NO</th>
-                <th>status</th>
                 <th>portfolioLink</th>
                 <th>phone</th>
                 <th>email</th>
+                <th>status</th>
                 <th>Action</th>
               </tr>
             </thead>

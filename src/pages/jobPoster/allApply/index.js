@@ -1,19 +1,21 @@
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { JobContext } from '../../../contenxt';
 import { getFromStorage } from '../../../util/localStore';
 import Apply from '../../user/Apply';
 
 function ManageJobsApply() {
   const [allApply, setAllApply] = useState([]);
+  const { currentUser } = useContext(JobContext);
 
   useEffect(() => {
     try {
       axios
-        .get(`${process.env.REACT_APP_API_URL}api/apply`, {
+        .get(`${process.env.REACT_APP_API_URL}api/apply/poster/${currentUser.id}`, {
           headers: {
             Authorization: `Bearer ${getFromStorage()}`,
           },
@@ -22,7 +24,7 @@ function ManageJobsApply() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [currentUser.id]);
 
   const updateApply = async (job, data) => {
     try {
